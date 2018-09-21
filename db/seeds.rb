@@ -5,8 +5,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-Category.create([{ topic: 'О погоде'}])
-Category.create([{ topic: 'Обо всем сразу'}])
-Category.create([{ topic: 'О компах'}])
-Category.create([{ topic: 'О музыке'}])
