@@ -2,26 +2,34 @@
 
 <h1>Posts</h1>
 
+
 <% @posts.each do |post| %>
 
-  <p><span><%= post.title %></span></p>
+<!--  эти две строки ниже наверное можно как то объединить, перебрала несколько вариантов, не вышло :(-->
+  <% unless post.link.blank? %>
+    <% unless post.category.blank? %>
 
-  <p><%= post.body %></p>
+      <p><span><%= post.title %></span></p>
 
-  <table>
-    <tbody>
-      <tr>
-        <td><%= link_to 'Show', post_path(post) %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    </tbody>
-  </table>
+      <p><%= post.body %></p>
 
-  <br>
+      <table>
+        <tbody>
+        <tr>
+          <td><%= link_to 'Show', post_path(post) %></td>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        </tbody>
+      </table>
 
+      <br>
+
+    <% end %>
+  <% end %>
 <% end %>
 
 
 
-  <%= link_to 'New Post', new_post_path %>
+
+<%= link_to 'New Post', new_post_path %>

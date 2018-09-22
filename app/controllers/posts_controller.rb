@@ -8,11 +8,14 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
+    # @category_post = @post.categories.build(params[:topic])
   end
 
   # GET /posts/new
   def new
-    @post = Post.new
+     @post = Post.new
+    # @post = current_user.posts.new
+    @post.build_category
   end
 
   # GET /posts/1/edit
@@ -22,6 +25,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
+    # @post = current_user.posts.new post_params
 
     if @post.save
       redirect_to @post, notice: 'Post was successfully created.'
@@ -52,6 +56,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :link)
+    params.require(:post).permit(:title, :body, :link, category_attributes: [:topic])
   end
 end

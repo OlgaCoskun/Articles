@@ -1,12 +1,13 @@
-<%= form_with(model: @post, local: true) do |f| %>
+<%#= form_with(model: @post, local: true) do |f| %>
+<%= form_for @post do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from
+        being saved:</h2>
       <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -25,6 +26,14 @@
     <%= f.label :link %>
     <%= f.text_field :link, class: 'form-control' %>
   </div>
+
+  <%#= render partial: 'categories/form' %>
+
+  <%= f.fields_for :category do |a| %>
+    <%= a.label "Category" %>
+    <%= a.text_field :topic %>
+  <% end %>
+
 
   <div class="actions">
     <%= f.submit %>
