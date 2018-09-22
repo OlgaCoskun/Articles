@@ -1,9 +1,19 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:send_to_moderator, :take_from_moderator, :show, :edit, :update, :destroy]
 
   # GET /posts
   def index
     @posts = Post.all
+  end
+
+  def send_to_moderator
+    @post.moderator_has = true
+    redirect_to root_path, notice: 'Your post has been sent to moderator' if @post.save
+  end
+
+  def take_from_moderator
+    @post.moderator_has = false
+    redirect_to root_path, notice: 'Your post has been back from moderator' if @post.save
   end
 
   # GET /posts/1

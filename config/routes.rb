@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments, only: [:create, :destroy]
+    member { patch :send_to_moderator }
+    member { patch :take_from_moderator }
   end
 
   resources :users, only: [:new, :show, :edit, :update]
