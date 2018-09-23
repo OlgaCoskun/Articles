@@ -11,4 +11,10 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :show, :edit, :update]
+
+  resources :posts do
+    resources :comments do
+      resource :likes
+    end
+  end
 end

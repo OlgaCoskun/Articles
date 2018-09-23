@@ -8,7 +8,6 @@ class CategoriesController < ApplicationController
 
   # POST /posts
   def create
-    # @category = Category.new(category_params)
     @add_category = @post.categories.build(category_params)
     @add_category.reload if @add_category.save
 

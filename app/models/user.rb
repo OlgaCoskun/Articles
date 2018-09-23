@@ -9,12 +9,4 @@ class User < ApplicationRecord
   validates :email, uniqueness: { case_sensitive: false }
   validates :email, format: /\A[a-zA-Z0-9\-_.]+@[a-zA-Z0-9\-_.]+\z/
 
-  before_validation :set_name, on: :create
-
-  private
-
-  def set_name
-    self.name = "user #{rand(100)}" if self.name.blank?
-  end
-
 end
