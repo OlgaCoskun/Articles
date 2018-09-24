@@ -1,9 +1,7 @@
 class CommentsController < ApplicationController
 
-  # has_many :likes
-
-  before_action :set_post, only: [:create, :destroy]
-  before_action :set_comment, only: [:destroy]
+  before_action :set_post, only: [:create, :destroy, :like]
+  before_action :set_comment, only: [:destroy, :like]
 
   def create
     @new_comment = @post.comments.build(comment_params)
@@ -19,6 +17,11 @@ class CommentsController < ApplicationController
     message = { notice: 'Comment was deleted' }
     @comment.destroy
     redirect_to @post, message
+  end
+
+  def like
+    @comment.increment!(:like_count)
+    redirect_to @post
   end
 
   private
