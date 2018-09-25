@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:send_to_moderator, :take_from_moderator, :show, :edit, :update, :destroy]
+  before_action :set_post, only: [:publish, :send_to_moderator, :take_from_moderator, :show, :edit, :update, :destroy]
 
   # GET /posts
   def index
@@ -16,14 +16,22 @@ class PostsController < ApplicationController
     redirect_to root_path, notice: 'Your post has been back from moderator' if @post.save
   end
 
+  def publish
+    if @post.link != '' && @post.category.topic != ''  # тут наверно как то красивее можно написать, пробовала blank? present?
+      @post.update(publish: true)
+      redirect_to post_path(@post), notice: 'Пост выставлен'
+    else
+      redirect_to post_path(@post), notice: 'Нужен линк и категория'
+    end
+  end
+
   # GET /posts/1
   def show
-    # @category_post = @post.categories.build(params[:topic])
   end
 
   # GET /posts/new
   def new
-     @post = Post.new
+    @post = Post.new
     @post.build_category
   end
 

@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     end
     member { patch :send_to_moderator }
     member { patch :take_from_moderator }
+    member { put :publish }
+    member { put :unpublish }
   end
 
   resources :users, only: [:new, :show, :edit, :update]
